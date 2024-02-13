@@ -1,0 +1,65 @@
+[build-system]
+requires = [
+    "setuptools",
+    "wheel"
+]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "hrassist"
+version = "0.0.1"
+description = """
+authors = [
+    {name = "Naveen Kumar Pandey", email = "naveen.pnd@gmail.com"},
+]
+requires-python = ">=3.10"
+license = {text = "MIT License", file = "LICENSE"}
+dependencies = [
+    "pydantic>=2.5.3",
+    "typer",
+    PyYAML >= 6.0
+]
+
+[tool.setuptools.packages.find]
+where = ["hrassist"]
+exclude = ["tests"]
+namespaces = false # Disable implicit namespaces
+
+[project.scripts]
+hrassist = "hrassist.cli:app"
+
+
+[tool.pytest.ini_options]
+addopts = [
+  "--color=yes",
+  "--durations=0",
+  "--strict-markers",
+  "--doctest-modules",
+]
+filterwarnings = [
+  "ignore::DeprecationWarning",
+  "ignore::UserWarning",
+]
+log_cli = "True"
+markers = [
+  "slow: slow tests",
+]
+minversion = "6.0"
+testpaths = "tests/"
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "def __repr__",
+    "if self.debug:",
+    "if settings.DEBUG",
+    "raise AssertionError",
+    "raise NotImplementedError",
+    "if 0:",
+    "if __name__ == .__main__.:"
+    ]
+
+# References
+# https://xebia.com/blog/a-practical-guide-to-setuptools-and-pyproject-toml/
+# https://github.com/nullhack/python-project-template/blob/main/%7B%7Bcookiecutter.project_slug%7D%7D/pyproject.toml
+# https://medium.com/p/bd840125e07a#d660
